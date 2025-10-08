@@ -45,7 +45,7 @@ export default function Hero() {
 
 
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-purple-100 via-pink-50 to-yellow-50">
+    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-purple-100 via-pink-50 to-yellow-50 pt-20 md:pt-24">
       {/* Brush Stroke Animations */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Brush Stroke 1 */}
@@ -160,7 +160,7 @@ export default function Hero() {
               transition={{ delay: 0.2, duration: 0.6 }}
               className="space-y-6"
             >
-              <h1 className="text-5xl md:text-6xl lg:text-7xl font-heading font-bold leading-tight">
+              <h1 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold leading-tight">
                 <span className="text-gray-900">Sanat gibi</span>
                 <br />
                 <span className="bg-gradient-to-r from-purple-600 to-yellow-500 bg-clip-text text-transparent">
@@ -169,7 +169,7 @@ export default function Hero() {
               </h1>
               
               {/* Güçlü Typing Animation */}
-              <div className="text-2xl md:text-3xl font-semibold min-h-[3rem]">
+              <div className="text-lg md:text-xl font-semibold min-h-[2rem]">
                 <span className="text-gray-800">
                   {typingText}
                   <motion.span
@@ -190,12 +190,12 @@ export default function Hero() {
               transition={{ delay: 0.6, duration: 0.6 }}
               className="space-y-3"
             >
-              <div className="flex items-center space-x-3 text-lg text-gray-700">
-                <Zap className="w-6 h-6 text-yellow-500" />
+              <div className="flex items-center space-x-2 text-sm md:text-base text-gray-700">
+                <Zap className="w-4 h-4 text-yellow-500" />
                 <span className="font-medium">1 hafta içinde teslim 🚀</span>
               </div>
-              <div className="flex items-center space-x-3 text-lg text-gray-700">
-                <CheckCircle className="w-6 h-6 text-green-500" />
+              <div className="flex items-center space-x-2 text-sm md:text-base text-gray-700">
+                <CheckCircle className="w-4 h-4 text-green-500" />
                 <span className="font-medium">Mobil uyumlu + özel tasarım</span>
               </div>
             </motion.div>
@@ -211,7 +211,7 @@ export default function Hero() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => window.open('https://www.instagram.com/artweb.tr', '_blank')}
-                className="group border-2 border-gray-800 bg-white text-gray-800 px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-50 transition-all duration-300 shadow-lg"
+                className="group border-2 border-gray-800 bg-white text-gray-800 px-4 py-2 md:px-6 md:py-3 rounded-full font-semibold text-sm md:text-base hover:bg-gray-50 transition-all duration-300 shadow-lg"
               >
                 <span>Siteni Özelleştir</span>
               </motion.button>
@@ -220,7 +220,7 @@ export default function Hero() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => window.open('https://wa.me/905356281306?text=Merhaba,%20web%20sitesi%20hakkında%20bilgi%20almak%20istiyorum.', '_blank')}
-                className="group bg-gradient-to-r from-yellow-400 to-yellow-500 text-white px-8 py-4 rounded-full font-semibold text-lg hover:shadow-xl transition-all duration-300 shadow-lg"
+                className="group bg-gradient-to-r from-yellow-400 to-yellow-500 text-white px-4 py-2 md:px-6 md:py-3 rounded-full font-semibold text-sm md:text-base hover:shadow-xl transition-all duration-300 shadow-lg"
               >
                 <span>Hemen Başlayalım</span>
               </motion.button>

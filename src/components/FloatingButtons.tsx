@@ -13,7 +13,7 @@ export default function FloatingButtons() {
   const instagramUrl = `https://instagram.com/${instagramHandle}`;
 
   return (
-    <div className="fixed bottom-6 right-6 z-50 flex flex-col space-y-3">
+    <div className="fixed bottom-4 right-4 md:bottom-6 md:right-6 z-50 flex flex-col space-y-2 md:space-y-3">
       {/* WhatsApp Button */}
       <motion.a
         href={whatsappUrl}
@@ -24,10 +24,10 @@ export default function FloatingButtons() {
         transition={{ delay: 1, duration: 0.5 }}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
-        className="group bg-green-500 hover:bg-green-600 text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center"
+        className="group bg-green-500 hover:bg-green-600 text-white p-2 md:p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center"
       >
-        <MessageCircle className="w-6 h-6" />
-        <span className="ml-2 text-sm font-semibold opacity-100 transition-opacity duration-300 whitespace-nowrap">
+        <MessageCircle className="w-4 h-4 md:w-6 md:h-6" />
+        <span className="ml-1 md:ml-2 text-xs md:text-sm font-semibold opacity-100 transition-opacity duration-300 whitespace-nowrap hidden sm:block">
           WhatsApp
         </span>
       </motion.a>
@@ -42,10 +42,10 @@ export default function FloatingButtons() {
         transition={{ delay: 1.2, duration: 0.5 }}
         whileHover={{ scale: 1.1 }}
         whileTap={{ scale: 0.9 }}
-        className="group bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center"
+        className="group bg-gradient-to-r from-purple-500 to-pink-500 hover:from-purple-600 hover:to-pink-600 text-white p-2 md:p-4 rounded-full shadow-lg hover:shadow-xl transition-all duration-300 flex items-center justify-center"
       >
-        <Instagram className="w-6 h-6" />
-        <span className="ml-2 text-sm font-semibold opacity-100 transition-opacity duration-300 whitespace-nowrap">
+        <Instagram className="w-4 h-4 md:w-6 md:h-6" />
+        <span className="ml-1 md:ml-2 text-xs md:text-sm font-semibold opacity-100 transition-opacity duration-300 whitespace-nowrap hidden sm:block">
           Instagram
         </span>
       </motion.a>
