@@ -19,6 +19,11 @@ export default function Countdown({ targetDate, onExpire }: CountdownProps) {
 
   // Sürekli güncellenen hedef tarih hesaplama
   const getDynamicTargetDate = () => {
+    if (typeof window === 'undefined') {
+      // Server-side rendering için fallback
+      return new Date(Date.now() + (15 * 24 * 60 * 60 * 1000));
+    }
+
     const now = new Date();
     const storedEndDate = localStorage.getItem('aw_countdown_end');
     
@@ -44,6 +49,9 @@ export default function Countdown({ targetDate, onExpire }: CountdownProps) {
   };
 
   useEffect(() => {
+    // Client-side rendering kontrolü
+    if (typeof window === 'undefined') return;
+
     const calculateTimeLeft = () => {
       const now = new Date().getTime();
       const target = getDynamicTargetDate().getTime();
