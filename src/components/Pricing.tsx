@@ -175,7 +175,7 @@ export default function Pricing() {
                 </div>
 
                 {/* Features */}
-                <div className="space-y-4 mb-8">
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-8">
                   {pkg.features.map((feature, featureIndex) => (
                     <motion.div
                       key={feature}
@@ -183,10 +183,10 @@ export default function Pricing() {
                       whileInView={{ opacity: 1, x: 0 }}
                       transition={{ delay: featureIndex * 0.05 }}
                       viewport={{ once: true }}
-                      className="flex items-center space-x-3"
+                      className="flex items-center space-x-2"
                     >
-                      <Check className="w-5 h-5 text-green-500 flex-shrink-0" />
-                      <span className="text-primary-gray">{feature}</span>
+                      <Check className="w-4 h-4 text-green-500 flex-shrink-0" />
+                      <span className="text-primary-gray text-sm">{feature}</span>
                     </motion.div>
                   ))}
                 </div>
