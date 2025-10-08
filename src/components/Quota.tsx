@@ -15,24 +15,70 @@ export default function Quota({ type, onQuotaUpdate }: QuotaProps) {
   useEffect(() => {
     const getQuotaFromStorage = () => {
       if (typeof window === 'undefined') {
-        return type === 'love' ? 5 : 7;
+        return type === 'love' ? 8 : 10;
       }
 
       try {
         const stored = localStorage.getItem('aw_opening_quota');
         if (stored) {
           const quota = JSON.parse(stored);
-          return quota[type] || 0;
+          let currentQuota = quota[type] || (type === 'love' ? 8 : 10);
+          
+          // Eğer quota 0 veya 1'e düştüyse, 7-10 arası rastgele sayı ata
+          if (currentQuota <= 1) {
+            const newQuota = type === 'love' 
+              ? Math.floor(Math.random() * 4) + 7 // 7-10 arası
+              : Math.floor(Math.random() * 4) + 7; // 7-10 arası
+            
+            // Yeni quota'yi localStorage'a kaydet
+            const updatedQuota = { ...quota, [type]: newQuota };
+            localStorage.setItem('aw_opening_quota', JSON.stringify(updatedQuota));
+            return newQuota;
+          }
+          
+          return currentQuota;
         }
+        
+        // İlk kez çalışıyorsa başlangıç değeri ata
+        const initialQuota = type === 'love' ? 8 : 10;
+        const initialData = { love: 8, corporate: 10 };
+        localStorage.setItem('aw_opening_quota', JSON.stringify(initialData));
+        return initialQuota;
       } catch (error) {
         console.error('Error reading quota from localStorage:', error);
+        return type === 'love' ? 8 : 10;
       }
-
-      return type === 'love' ? 5 : 7;
     };
 
     setRemaining(getQuotaFromStorage());
   }, [type]);
+
+  // Quota'yı azaltma fonksiyonu
+  const decreaseQuota = () => {
+    try {
+      const stored = localStorage.getItem('aw_opening_quota');
+      if (stored) {
+        const quota = JSON.parse(stored);
+        let currentQuota = quota[type] || 0;
+        
+        if (currentQuota > 0) {
+          const newQuota = currentQuota - 1;
+          
+          // Eğer 0'a düştüyse, yeni rastgele sayı ata
+          const finalQuota = newQuota <= 0 
+            ? (type === 'love' ? Math.floor(Math.random() * 4) + 7 : Math.floor(Math.random() * 4) + 7)
+            : newQuota;
+          
+          const updatedQuota = { ...quota, [type]: finalQuota };
+          localStorage.setItem('aw_opening_quota', JSON.stringify(updatedQuota));
+          setRemaining(finalQuota);
+          onQuotaUpdate?.(type);
+        }
+      }
+    } catch (error) {
+      console.error('Error updating quota:', error);
+    }
+  };
 
 
   const isLowStock = remaining <= 2;
@@ -97,7 +143,7 @@ export default function Quota({ type, onQuotaUpdate }: QuotaProps) {
       <div className="w-full bg-gray-200 rounded-full h-2 mb-2">
         <motion.div
           initial={{ width: 0 }}
-          animate={{ width: `${(remaining / (type === 'love' ? 5 : 7)) * 100}%` }}
+          animate={{ width: `${(remaining / (type === 'love' ? 10 : 10)) * 100}%` }}
           transition={{ duration: 1, ease: "easeOut" }}
           className={`h-2 rounded-full ${
             isOutOfStock

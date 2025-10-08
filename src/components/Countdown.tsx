@@ -17,21 +17,55 @@ export default function Countdown({ targetDate, onExpire }: CountdownProps) {
     isExpired: false,
   });
 
+  // Sürekli güncellenen hedef tarih hesaplama
+  const getDynamicTargetDate = () => {
+    const now = new Date();
+    const storedEndDate = localStorage.getItem('aw_countdown_end');
+    
+    if (storedEndDate) {
+      const endDate = new Date(storedEndDate);
+      const nowTime = now.getTime();
+      const endTime = endDate.getTime();
+      
+      // Eğer süre dolmuşsa 15 gün ekle
+      if (nowTime >= endTime) {
+        const newEndDate = new Date(nowTime + (15 * 24 * 60 * 60 * 1000));
+        localStorage.setItem('aw_countdown_end', newEndDate.toISOString());
+        return newEndDate;
+      }
+      
+      return endDate;
+    } else {
+      // İlk kez çalışıyorsa 15 gün ekle
+      const newEndDate = new Date(now.getTime() + (15 * 24 * 60 * 60 * 1000));
+      localStorage.setItem('aw_countdown_end', newEndDate.toISOString());
+      return newEndDate;
+    }
+  };
+
   useEffect(() => {
     const calculateTimeLeft = () => {
       const now = new Date().getTime();
-      const target = new Date(targetDate).getTime();
+      const target = getDynamicTargetDate().getTime();
       const difference = target - now;
 
       if (difference <= 0) {
+        // Süre doldu, yeni tarih ayarla
+        const newTarget = getDynamicTargetDate();
+        const newDifference = newTarget.getTime() - now.getTime();
+        
+        const days = Math.floor(newDifference / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((newDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        const minutes = Math.floor((newDifference % (1000 * 60 * 60)) / (1000 * 60));
+        const seconds = Math.floor((newDifference % (1000 * 60)) / 1000);
+
         setTimeLeft({
-          days: 0,
-          hours: 0,
-          minutes: 0,
-          seconds: 0,
-          isExpired: true,
+          days,
+          hours,
+          minutes,
+          seconds,
+          isExpired: false,
         });
-        onExpire?.();
         return;
       }
 
@@ -55,22 +89,7 @@ export default function Countdown({ targetDate, onExpire }: CountdownProps) {
     return () => clearInterval(timer);
   }, [targetDate, onExpire]);
 
-  if (timeLeft.isExpired) {
-    return (
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        className="text-center"
-      >
-        <div className="text-2xl font-bold text-red-500 mb-2">
-          ⏰ Kampanya Sona Erdi
-        </div>
-        <p className="text-primary-gray">
-          Ancak hala bizimle iletişime geçebilirsiniz!
-        </p>
-      </motion.div>
-    );
-  }
+  // Artık expired durumu göstermiyoruz, sürekli güncelleniyor
 
   const timeUnits = [
     { label: 'Gün', value: timeLeft.days },
