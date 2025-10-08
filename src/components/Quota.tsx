@@ -10,14 +10,13 @@ interface QuotaProps {
 }
 
 export default function Quota({ type, onQuotaUpdate }: QuotaProps) {
-  const [remaining, setRemaining] = useState(0);
+  const [remaining, setRemaining] = useState(type === 'love' ? 8 : 10);
 
   useEffect(() => {
-    const getQuotaFromStorage = () => {
-      if (typeof window === 'undefined') {
-        return type === 'love' ? 8 : 10;
-      }
+    // Client-side rendering kontrolü
+    if (typeof window === 'undefined') return;
 
+    const getQuotaFromStorage = () => {
       try {
         const stored = localStorage.getItem('aw_opening_quota');
         if (stored) {
@@ -50,7 +49,15 @@ export default function Quota({ type, onQuotaUpdate }: QuotaProps) {
       }
     };
 
+    // Hemen hesapla
     setRemaining(getQuotaFromStorage());
+    
+    // 1 saniye sonra tekrar hesapla (localStorage hazır olması için)
+    const timer = setTimeout(() => {
+      setRemaining(getQuotaFromStorage());
+    }, 1000);
+
+    return () => clearTimeout(timer);
   }, [type]);
 
   // Quota'yı azaltma fonksiyonu
