@@ -91,33 +91,33 @@ const formatPrice = (price: number) => {
   }).format(price);
 };
 
-const getTimeRemaining = (endDate: string) => {
-  const now = new Date().getTime();
-  const end = new Date(endDate).getTime();
-  const difference = end - now;
-
-  if (difference > 0) {
-    const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-    const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
+const getTimeRemaining = (endDate: string, cardId: string) => {
+  // Her kart için farklı sabit değerler
+  if (cardId === 'love') {
     return {
-      days: days.toString().padStart(2, '0'),
-      hours: hours.toString().padStart(2, '0'),
-      minutes: minutes.toString().padStart(2, '0'),
-      seconds: seconds.toString().padStart(2, '0'),
-      total: difference
+      days: '08',
+      hours: '12',
+      minutes: '30',
+      seconds: '45',
+      total: 1000000
+    };
+  } else if (cardId === 'corporate') {
+    return {
+      days: '10',
+      hours: '18',
+      minutes: '15',
+      seconds: '20',
+      total: 1000000
+    };
+  } else {
+    return {
+      days: '14',
+      hours: '06',
+      minutes: '45',
+      seconds: '10',
+      total: 1000000
     };
   }
-
-  return {
-    days: '00',
-    hours: '00',
-    minutes: '00',
-    seconds: '00',
-    total: 0
-  };
 };
 
 export default function HeroRotatingCard() {
@@ -135,10 +135,10 @@ export default function HeroRotatingCard() {
   // Real-time countdown
   useEffect(() => {
     // Set initial value immediately
-    setTimeRemaining(getTimeRemaining(cardData[currentIndex].endDate));
+    setTimeRemaining(getTimeRemaining(cardData[currentIndex].endDate, cardData[currentIndex].id));
     
     const interval = setInterval(() => {
-      setTimeRemaining(getTimeRemaining(cardData[currentIndex].endDate));
+      setTimeRemaining(getTimeRemaining(cardData[currentIndex].endDate, cardData[currentIndex].id));
     }, 1000);
 
     return () => clearInterval(interval);
