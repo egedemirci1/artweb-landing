@@ -9,78 +9,53 @@ interface CountdownProps {
 }
 
 export default function Countdown({ targetDate, onExpire }: CountdownProps) {
+  // Sabit başlangıç değerleri
   const [timeLeft, setTimeLeft] = useState({
-    days: 15,
-    hours: 23,
-    minutes: 59,
-    seconds: 59,
+    days: 14,
+    hours: 12,
+    minutes: 35,
+    seconds: 42,
     isExpired: false,
   });
 
-  // Sürekli güncellenen hedef tarih hesaplama
-  const getDynamicTargetDate = () => {
-    if (typeof window === 'undefined') {
-      // Server-side rendering için fallback
-      return new Date(Date.now() + (15 * 24 * 60 * 60 * 1000));
-    }
-
-    const now = new Date();
-    const storedEndDate = localStorage.getItem('aw_countdown_end');
-    
-    if (storedEndDate) {
-      const endDate = new Date(storedEndDate);
-      const nowTime = now.getTime();
-      const endTime = endDate.getTime();
-      
-      // Eğer süre dolmuşsa 15 gün ekle
-      if (nowTime >= endTime) {
-        const newEndDate = new Date(nowTime + (15 * 24 * 60 * 60 * 1000));
-        localStorage.setItem('aw_countdown_end', newEndDate.toISOString());
-        return newEndDate;
-      }
-      
-      return endDate;
-    } else {
-      // İlk kez çalışıyorsa 15 gün ekle
-      const newEndDate = new Date(now.getTime() + (15 * 24 * 60 * 60 * 1000));
-      localStorage.setItem('aw_countdown_end', newEndDate.toISOString());
-      return newEndDate;
-    }
-  };
-
   useEffect(() => {
-    const timer = setInterval(() => {
-      setTimeLeft(prev => {
-        let { days, hours, minutes, seconds } = prev;
-        
-        // Saniye azalt
-        if (seconds > 0) {
-          seconds--;
-        } else if (minutes > 0) {
-          seconds = 59;
-          minutes--;
-        } else if (hours > 0) {
-          seconds = 59;
-          minutes = 59;
-          hours--;
-        } else if (days > 0) {
-          seconds = 59;
-          minutes = 59;
-          hours = 23;
-          days--;
-        } else {
-          // Süre doldu, 15 gün ekle
-          days = 15;
-          hours = 23;
-          minutes = 59;
-          seconds = 59;
-        }
-        
-        return { days, hours, minutes, seconds, isExpired: false };
-      });
-    }, 1000);
+    // 2 saniye sonra başla (sayfa yüklenmesini bekle)
+    const startTimer = setTimeout(() => {
+      const timer = setInterval(() => {
+        setTimeLeft(prev => {
+          let { days, hours, minutes, seconds } = prev;
+          
+          // Saniye azalt
+          if (seconds > 0) {
+            seconds--;
+          } else if (minutes > 0) {
+            seconds = 59;
+            minutes--;
+          } else if (hours > 0) {
+            seconds = 59;
+            minutes = 59;
+            hours--;
+          } else if (days > 0) {
+            seconds = 59;
+            minutes = 59;
+            hours = 23;
+            days--;
+          } else {
+            // Süre doldu, yeni değerler ata
+            days = Math.floor(Math.random() * 5) + 12; // 12-16 gün
+            hours = Math.floor(Math.random() * 24); // 0-23 saat
+            minutes = Math.floor(Math.random() * 60); // 0-59 dakika
+            seconds = Math.floor(Math.random() * 60); // 0-59 saniye
+          }
+          
+          return { days, hours, minutes, seconds, isExpired: false };
+        });
+      }, 1000);
 
-    return () => clearInterval(timer);
+      return () => clearInterval(timer);
+    }, 2000);
+
+    return () => clearTimeout(startTimer);
   }, []);
 
   // Artık expired durumu göstermiyoruz, sürekli güncelleniyor

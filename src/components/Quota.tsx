@@ -10,27 +10,32 @@ interface QuotaProps {
 }
 
 export default function Quota({ type, onQuotaUpdate }: QuotaProps) {
-  const [remaining, setRemaining] = useState(type === 'love' ? 8 : 10);
+  // Sabit başlangıç değerleri
+  const [remaining, setRemaining] = useState(type === 'love' ? 7 : 9);
 
   useEffect(() => {
-    // Her 60 saniyede bir quota'yı kontrol et
-    const interval = setInterval(() => {
-      setRemaining(prev => {
-        // Eğer quota 1'e düştüyse, 7-10 arası rastgele sayı ata
-        if (prev <= 1) {
-          return Math.floor(Math.random() * 4) + 7; // 7-10 arası
-        }
-        
-        // %30 şansla azalt (sadece 3'ten büyükse)
-        if (Math.random() < 0.3 && prev > 3) {
-          return prev - 1;
-        }
-        
-        return prev;
-      });
-    }, 60000); // 60 saniye
+    // 3 saniye sonra başla (sayfa yüklenmesini bekle)
+    const startTimer = setTimeout(() => {
+      const interval = setInterval(() => {
+        setRemaining(prev => {
+          // Eğer quota 1'e düştüyse, 6-9 arası rastgele sayı ata
+          if (prev <= 1) {
+            return Math.floor(Math.random() * 4) + 6; // 6-9 arası
+          }
+          
+          // %25 şansla azalt (sadece 2'den büyükse)
+          if (Math.random() < 0.25 && prev > 2) {
+            return prev - 1;
+          }
+          
+          return prev;
+        });
+      }, 45000); // 45 saniye
 
-    return () => clearInterval(interval);
+      return () => clearInterval(interval);
+    }, 3000);
+
+    return () => clearTimeout(startTimer);
   }, [type]);
 
   // Quota'yı azaltma fonksiyonu
