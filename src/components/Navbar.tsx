@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { Menu, X } from 'lucide-react';
 import Image from 'next/image';
-import { CONFIG } from '@/lib/config';
 
 export default function Navbar() {
   const [isScrolled, setIsScrolled] = useState(false);

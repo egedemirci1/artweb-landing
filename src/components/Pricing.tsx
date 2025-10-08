@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Heart, Building2, Check, Star, Zap } from 'lucide-react';
+import { Heart, Building2, Check, Star } from 'lucide-react';
 import { CONFIG } from '@/lib/config';
 import { formatPrice } from '@/lib/utils';
 
@@ -55,12 +55,6 @@ const packages = [
 ];
 
 export default function Pricing() {
-  const scrollToContact = () => {
-    const element = document.getElementById('contact');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
 
   return (
     <section id="pricing" className="py-20 bg-gradient-to-br from-indigo-100 via-purple-100 to-pink-100 relative overflow-hidden">

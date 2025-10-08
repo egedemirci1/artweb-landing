@@ -190,7 +190,7 @@ export default function FAQ() {
                 onClick={() => window.open(CONFIG.social.whatsapp, '_blank')}
                 className="bg-green-500 text-white px-8 py-3 rounded-full font-semibold hover:bg-green-600 transition-colors w-full sm:w-auto"
               >
-                WhatsApp'tan Yaz
+                WhatsApp&apos;tan Yaz
               </motion.button>
             </div>
           </div>

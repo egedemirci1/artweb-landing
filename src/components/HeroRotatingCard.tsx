@@ -122,7 +122,6 @@ const getTimeRemaining = (endDate: string) => {
 
 export default function HeroRotatingCard() {
   const [currentIndex, setCurrentIndex] = useState(0);
-  const [isAutoPlaying, setIsAutoPlaying] = useState(true);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
   const [timeRemaining, setTimeRemaining] = useState({

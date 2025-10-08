@@ -1,8 +1,8 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { ArrowRight, Zap, CheckCircle, Sparkles } from 'lucide-react';
+import { motion } from 'framer-motion';
+import { Zap, CheckCircle } from 'lucide-react';
 import HeroRotatingCard from './HeroRotatingCard';
 
 const typingTexts = [
@@ -43,12 +43,6 @@ export default function Hero() {
     }
   }, [typingText, isTyping, currentTypingIndex]);
 
-  const scrollToSection = (sectionId: string) => {
-    const element = document.getElementById(sectionId);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
 
   return (
     <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-purple-100 via-pink-50 to-yellow-50">

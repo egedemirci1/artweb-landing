@@ -1,7 +1,7 @@
 'use client';
 
 import { motion } from 'framer-motion';
-import { Instagram, MessageCircle, Mail, Phone } from 'lucide-react';
+import { Instagram, MessageCircle, Mail } from 'lucide-react';
 import { CONFIG } from '@/lib/config';
 
 export default function LeadForm() {
@@ -38,7 +38,7 @@ export default function LeadForm() {
             Instagram'da Takip Edin
           </h2>
           <p className="text-lg text-primary-gray max-w-2xl mx-auto">
-            Çalışmalarımızı, müşteri deneyimlerini ve güncel projelerimizi Instagram'da takip edebilirsiniz.
+            Çalışmalarımızı, müşteri deneyimlerini ve güncel projelerimizi Instagram&apos;da takip edebilirsiniz.
           </p>
         </motion.div>
 
@@ -91,7 +91,7 @@ export default function LeadForm() {
 
               <div className="mt-6 p-4 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg border border-purple-200">
                 <p className="text-sm text-purple-800">
-                  <strong>💡 İpucu:</strong> Instagram'da son projelerimizi ve müşteri deneyimlerini görebilirsiniz!
+                  <strong>💡 İpucu:</strong> Instagram&apos;da son projelerimizi ve müşteri deneyimlerini görebilirsiniz!
                 </p>
               </div>
             </div>
@@ -114,7 +114,7 @@ export default function LeadForm() {
                   className="bg-white text-green-500 px-8 py-4 rounded-full font-semibold text-lg hover:bg-gray-100 transition-colors flex items-center space-x-2 mx-auto"
                 >
                   <MessageCircle className="w-5 h-5" />
-                  <span>WhatsApp'tan Yaz</span>
+                  <span>WhatsApp&apos;tan Yaz</span>
                 </motion.button>
               </div>
             </div>
