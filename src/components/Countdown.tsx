@@ -11,9 +11,9 @@ interface CountdownProps {
 export default function Countdown({ targetDate, onExpire }: CountdownProps) {
   const [timeLeft, setTimeLeft] = useState({
     days: 15,
-    hours: 0,
-    minutes: 0,
-    seconds: 0,
+    hours: 23,
+    minutes: 59,
+    seconds: 59,
     isExpired: false,
   });
 
@@ -49,73 +49,38 @@ export default function Countdown({ targetDate, onExpire }: CountdownProps) {
   };
 
   useEffect(() => {
-    // Client-side rendering kontrolü
-    if (typeof window === 'undefined') return;
-
-    const calculateTimeLeft = () => {
-      try {
-        const now = new Date().getTime();
-        const target = getDynamicTargetDate().getTime();
-        const difference = target - now;
-
-        if (difference <= 0) {
-          // Süre doldu, yeni tarih ayarla
-          const newTarget = getDynamicTargetDate();
-          const newDifference = newTarget.getTime() - now.getTime();
-          
-          const days = Math.floor(newDifference / (1000 * 60 * 60 * 24));
-          const hours = Math.floor((newDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-          const minutes = Math.floor((newDifference % (1000 * 60 * 60)) / (1000 * 60));
-          const seconds = Math.floor((newDifference % (1000 * 60)) / 1000);
-
-          setTimeLeft({
-            days,
-            hours,
-            minutes,
-            seconds,
-            isExpired: false,
-          });
-          return;
+    const timer = setInterval(() => {
+      setTimeLeft(prev => {
+        let { days, hours, minutes, seconds } = prev;
+        
+        // Saniye azalt
+        if (seconds > 0) {
+          seconds--;
+        } else if (minutes > 0) {
+          seconds = 59;
+          minutes--;
+        } else if (hours > 0) {
+          seconds = 59;
+          minutes = 59;
+          hours--;
+        } else if (days > 0) {
+          seconds = 59;
+          minutes = 59;
+          hours = 23;
+          days--;
+        } else {
+          // Süre doldu, 15 gün ekle
+          days = 15;
+          hours = 23;
+          minutes = 59;
+          seconds = 59;
         }
+        
+        return { days, hours, minutes, seconds, isExpired: false };
+      });
+    }, 1000);
 
-        const days = Math.floor(difference / (1000 * 60 * 60 * 24));
-        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
-        const seconds = Math.floor((difference % (1000 * 60)) / 1000);
-
-        setTimeLeft({
-          days,
-          hours,
-          minutes,
-          seconds,
-          isExpired: false,
-        });
-      } catch (error) {
-        console.error('Countdown calculation error:', error);
-        // Fallback: 15 gün göster
-        setTimeLeft({
-          days: 15,
-          hours: 0,
-          minutes: 0,
-          seconds: 0,
-          isExpired: false,
-        });
-      }
-    };
-
-    // Hemen hesapla
-    calculateTimeLeft();
-    
-    // 1 saniye sonra tekrar hesapla (localStorage hazır olması için)
-    const initialTimer = setTimeout(calculateTimeLeft, 1000);
-    
-    // Sonra her saniye güncelle
-    const timer = setInterval(calculateTimeLeft, 1000);
-
-    return () => {
-      clearTimeout(initialTimer);
-      clearInterval(timer);
-    };
+    return () => clearInterval(timer);
   }, []);
 
   // Artık expired durumu göstermiyoruz, sürekli güncelleniyor

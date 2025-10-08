@@ -9,53 +9,40 @@ interface QuotaProps {
   onQuotaUpdate?: (type: 'love' | 'corporate') => void;
 }
 
-// Quota değerlerini global olarak sakla (component dışında)
-let globalQuota = {
-  love: 8,
-  corporate: 10
-};
-
 export default function Quota({ type, onQuotaUpdate }: QuotaProps) {
-  const [remaining, setRemaining] = useState(globalQuota[type]);
+  const [remaining, setRemaining] = useState(type === 'love' ? 8 : 10);
 
   useEffect(() => {
-    // Her 30 saniyede bir quota'yı güncelle
-    const updateQuota = () => {
-      const currentQuota = globalQuota[type];
-      
-      // Eğer quota 0 veya 1'e düştüyse, yeni rastgele sayı ata
-      if (currentQuota <= 1) {
-        const newQuota = Math.floor(Math.random() * 4) + 7; // 7-10 arası
-        globalQuota[type] = newQuota;
-        setRemaining(newQuota);
-      } else {
-        // Rastgele azalt (her 30 saniyede %20 şansla)
-        if (Math.random() < 0.2 && currentQuota > 2) {
-          const newQuota = currentQuota - 1;
-          globalQuota[type] = newQuota;
-          setRemaining(newQuota);
+    // Her 60 saniyede bir quota'yı kontrol et
+    const interval = setInterval(() => {
+      setRemaining(prev => {
+        // Eğer quota 1'e düştüyse, 7-10 arası rastgele sayı ata
+        if (prev <= 1) {
+          return Math.floor(Math.random() * 4) + 7; // 7-10 arası
         }
-      }
-    };
-
-    // İlk güncelleme
-    updateQuota();
-    
-    // Her 30 saniyede güncelle
-    const interval = setInterval(updateQuota, 30000);
+        
+        // %30 şansla azalt (sadece 3'ten büyükse)
+        if (Math.random() < 0.3 && prev > 3) {
+          return prev - 1;
+        }
+        
+        return prev;
+      });
+    }, 60000); // 60 saniye
 
     return () => clearInterval(interval);
   }, [type]);
 
-  // Quota'yı azaltma fonksiyonu (artık kullanılmıyor ama callback için tutuyoruz)
+  // Quota'yı azaltma fonksiyonu
   const decreaseQuota = () => {
-    const currentQuota = globalQuota[type];
-    if (currentQuota > 0) {
-      const newQuota = currentQuota - 1;
-      globalQuota[type] = newQuota;
-      setRemaining(newQuota);
-      onQuotaUpdate?.(type);
-    }
+    setRemaining(prev => {
+      if (prev > 0) {
+        const newQuota = prev - 1;
+        onQuotaUpdate?.(type);
+        return newQuota;
+      }
+      return prev;
+    });
   };
 
 
