@@ -9,81 +9,52 @@ interface QuotaProps {
   onQuotaUpdate?: (type: 'love' | 'corporate') => void;
 }
 
+// Quota değerlerini global olarak sakla (component dışında)
+let globalQuota = {
+  love: 8,
+  corporate: 10
+};
+
 export default function Quota({ type, onQuotaUpdate }: QuotaProps) {
-  const [remaining, setRemaining] = useState(type === 'love' ? 8 : 10);
+  const [remaining, setRemaining] = useState(globalQuota[type]);
 
   useEffect(() => {
-    // Client-side rendering kontrolü
-    if (typeof window === 'undefined') return;
-
-    const getQuotaFromStorage = () => {
-      try {
-        const stored = localStorage.getItem('aw_opening_quota');
-        if (stored) {
-          const quota = JSON.parse(stored);
-          let currentQuota = quota[type] || (type === 'love' ? 8 : 10);
-          
-          // Eğer quota 0 veya 1'e düştüyse, 7-10 arası rastgele sayı ata
-          if (currentQuota <= 1) {
-            const newQuota = type === 'love' 
-              ? Math.floor(Math.random() * 4) + 7 // 7-10 arası
-              : Math.floor(Math.random() * 4) + 7; // 7-10 arası
-            
-            // Yeni quota'yi localStorage'a kaydet
-            const updatedQuota = { ...quota, [type]: newQuota };
-            localStorage.setItem('aw_opening_quota', JSON.stringify(updatedQuota));
-            return newQuota;
-          }
-          
-          return currentQuota;
+    // Her 30 saniyede bir quota'yı güncelle
+    const updateQuota = () => {
+      const currentQuota = globalQuota[type];
+      
+      // Eğer quota 0 veya 1'e düştüyse, yeni rastgele sayı ata
+      if (currentQuota <= 1) {
+        const newQuota = Math.floor(Math.random() * 4) + 7; // 7-10 arası
+        globalQuota[type] = newQuota;
+        setRemaining(newQuota);
+      } else {
+        // Rastgele azalt (her 30 saniyede %20 şansla)
+        if (Math.random() < 0.2 && currentQuota > 2) {
+          const newQuota = currentQuota - 1;
+          globalQuota[type] = newQuota;
+          setRemaining(newQuota);
         }
-        
-        // İlk kez çalışıyorsa başlangıç değeri ata
-        const initialQuota = type === 'love' ? 8 : 10;
-        const initialData = { love: 8, corporate: 10 };
-        localStorage.setItem('aw_opening_quota', JSON.stringify(initialData));
-        return initialQuota;
-      } catch (error) {
-        console.error('Error reading quota from localStorage:', error);
-        return type === 'love' ? 8 : 10;
       }
     };
 
-    // Hemen hesapla
-    setRemaining(getQuotaFromStorage());
+    // İlk güncelleme
+    updateQuota();
     
-    // 1 saniye sonra tekrar hesapla (localStorage hazır olması için)
-    const timer = setTimeout(() => {
-      setRemaining(getQuotaFromStorage());
-    }, 1000);
+    // Her 30 saniyede güncelle
+    const interval = setInterval(updateQuota, 30000);
 
-    return () => clearTimeout(timer);
+    return () => clearInterval(interval);
   }, [type]);
 
-  // Quota'yı azaltma fonksiyonu
+  // Quota'yı azaltma fonksiyonu (artık kullanılmıyor ama callback için tutuyoruz)
   const decreaseQuota = () => {
-    try {
-      const stored = localStorage.getItem('aw_opening_quota');
-      if (stored) {
-        const quota = JSON.parse(stored);
-        let currentQuota = quota[type] || 0;
-        
-        if (currentQuota > 0) {
-          const newQuota = currentQuota - 1;
-          
-          // Eğer 0'a düştüyse, yeni rastgele sayı ata
-          const finalQuota = newQuota <= 0 
-            ? (type === 'love' ? Math.floor(Math.random() * 4) + 7 : Math.floor(Math.random() * 4) + 7)
-            : newQuota;
-          
-          const updatedQuota = { ...quota, [type]: finalQuota };
-          localStorage.setItem('aw_opening_quota', JSON.stringify(updatedQuota));
-          setRemaining(finalQuota);
-          onQuotaUpdate?.(type);
-        }
-      }
-    } catch (error) {
-      console.error('Error updating quota:', error);
+    const currentQuota = globalQuota[type];
+    if (currentQuota > 0) {
+      const newQuota = currentQuota - 1;
+      globalQuota[type] = newQuota;
+      setRemaining(newQuota);
+      onQuotaUpdate?.(type);
     }
   };
 
