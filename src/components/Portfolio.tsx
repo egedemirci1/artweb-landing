@@ -214,23 +214,39 @@ export default function Portfolio() {
               Her proje benzersizdir. Sizin hikayenizi, tarzınızı ve ihtiyaçlarınızı 
               yansıtan özel bir tasarım yaratıyoruz. Hazır şablon yok, sadece sanat var.
             </p>
-            <div className="flex flex-wrap justify-center gap-4 text-sm text-white">
-              <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-primary-yellow rounded-full"></div>
-                <span>Özel Tasarım</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-primary-yellow rounded-full"></div>
-                <span>Modern Teknoloji</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-primary-yellow rounded-full"></div>
-                <span>Mobil Uyumlu</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-primary-yellow rounded-full"></div>
-                <span>Hızlı Teslim</span>
-              </div>
+            <div className="flex flex-wrap justify-center gap-3">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.1 }}
+                className="bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 px-6 py-3 rounded-full font-semibold text-sm shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+              >
+                Özel Tasarım
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.2 }}
+                className="bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 px-6 py-3 rounded-full font-semibold text-sm shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+              >
+                Modern Teknoloji
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.3 }}
+                className="bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 px-6 py-3 rounded-full font-semibold text-sm shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+              >
+                Mobil Uyumlu
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.4 }}
+                className="bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 px-6 py-3 rounded-full font-semibold text-sm shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+              >
+                Hızlı Teslim
+              </motion.div>
             </div>
           </div>
         </motion.div>
