@@ -10,7 +10,11 @@ interface QuotaProps {
 }
 
 export default function Quota({ type, onQuotaUpdate }: QuotaProps) {
-  const [remaining, setRemaining] = useState(type === 'love' ? 8 : 10);
+  const [remaining, setRemaining] = useState(() => {
+    if (type === 'love') return 8;
+    if (type === 'corporate') return 10;
+    return 12;
+  });
 
   useEffect(() => {
     // Her 30 saniyede bir kontrol et

@@ -9,16 +9,21 @@ interface CountdownProps {
 }
 
 export default function Countdown({ targetDate, onExpire }: CountdownProps) {
-  const [timeLeft, setTimeLeft] = useState({
-    days: 15,
-    hours: 23,
-    minutes: 45,
-    seconds: 30,
-    isExpired: false,
-  });
+  // Her kart için farklı başlangıç değerleri
+  const getInitialTime = () => {
+    // targetDate'e göre farklı değerler döndür
+    if (targetDate.includes('love') || targetDate.includes('sevgili')) {
+      return { days: 8, hours: 12, minutes: 30, seconds: 45 };
+    } else if (targetDate.includes('corporate') || targetDate.includes('kurumsal')) {
+      return { days: 10, hours: 18, minutes: 15, seconds: 20 };
+    } else {
+      return { days: 14, hours: 6, minutes: 45, seconds: 10 };
+    }
+  };
+
+  const [timeLeft, setTimeLeft] = useState(() => getInitialTime());
 
   useEffect(() => {
-    // Hemen başla
     const timer = setInterval(() => {
       setTimeLeft(prev => {
         let { days, hours, minutes, seconds } = prev;
@@ -38,11 +43,9 @@ export default function Countdown({ targetDate, onExpire }: CountdownProps) {
           hours = 23;
           days--;
         } else {
-          // Reset to 15 days
-          days = 15;
-          hours = 23;
-          minutes = 45;
-          seconds = 30;
+          // Reset to initial values
+          const initial = getInitialTime();
+          return { ...initial, isExpired: false };
         }
         
         return { days, hours, minutes, seconds, isExpired: false };
@@ -50,7 +53,7 @@ export default function Countdown({ targetDate, onExpire }: CountdownProps) {
     }, 1000);
 
     return () => clearInterval(timer);
-  }, []);
+  }, [targetDate]);
 
   const timeUnits = [
     { label: 'Gün', value: timeLeft.days },
