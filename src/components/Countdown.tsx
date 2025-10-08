@@ -10,7 +10,7 @@ interface CountdownProps {
 
 export default function Countdown({ targetDate, onExpire }: CountdownProps) {
   const [timeLeft, setTimeLeft] = useState({
-    days: 0,
+    days: 15,
     hours: 0,
     minutes: 0,
     seconds: 0,
@@ -95,7 +95,7 @@ export default function Countdown({ targetDate, onExpire }: CountdownProps) {
     const timer = setInterval(calculateTimeLeft, 1000);
 
     return () => clearInterval(timer);
-  }, [targetDate, onExpire]);
+  }, []);
 
   // Artık expired durumu göstermiyoruz, sürekli güncelleniyor
 

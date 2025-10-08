@@ -141,7 +141,7 @@ export default function LeadForm() {
                   height="600"
                   frameBorder="0"
                   scrolling="no"
-                  allowTransparency={true}
+                  allowtransparency="true"
                   className="rounded-lg"
                   title="Instagram Profile"
                 ></iframe>
