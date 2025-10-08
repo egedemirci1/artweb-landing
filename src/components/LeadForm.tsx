@@ -35,7 +35,7 @@ export default function LeadForm() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-heading font-bold text-primary-black mb-4">
-            Instagram'da Takip Edin
+            Instagram&apos;da Takip Edin
           </h2>
           <p className="text-lg text-primary-gray max-w-2xl mx-auto">
             Çalışmalarımızı, müşteri deneyimlerini ve güncel projelerimizi Instagram&apos;da takip edebilirsiniz.

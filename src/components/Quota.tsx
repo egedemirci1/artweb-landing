@@ -34,25 +34,6 @@ export default function Quota({ type, onQuotaUpdate }: QuotaProps) {
     setRemaining(getQuotaFromStorage());
   }, [type]);
 
-  const updateQuota = () => {
-    if (typeof window === 'undefined') return;
-
-    try {
-      const stored = localStorage.getItem('aw_opening_quota');
-      const current = stored ? JSON.parse(stored) : { love: 5, corporate: 7 };
-      
-      const updated = {
-        ...current,
-        [type]: Math.max(0, current[type] - 1),
-      };
-      
-      localStorage.setItem('aw_opening_quota', JSON.stringify(updated));
-      setRemaining(updated[type]);
-      onQuotaUpdate?.(type);
-    } catch (error) {
-      console.error('Error updating quota in localStorage:', error);
-    }
-  };
 
   const isLowStock = remaining <= 2;
   const isOutOfStock = remaining === 0;
