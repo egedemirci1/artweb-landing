@@ -155,23 +155,39 @@ export default function Benefits() {
               Sadece web sitesi yapmıyoruz, dijital deneyim yaratıyoruz. 
               Her proje bizim için bir sanat eseri, her müşteri bizim için bir sanatçı.
             </p>
-            <div className="flex flex-wrap justify-center gap-4 text-sm text-gray-800 font-medium">
-              <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-primary-yellow rounded-full"></div>
-                <span>Modern Teknolojiler</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-primary-yellow rounded-full"></div>
-                <span>SEO Optimizasyonu</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-primary-yellow rounded-full"></div>
-                <span>Güvenlik Standartları</span>
-              </div>
-              <div className="flex items-center space-x-2">
-                <div className="w-2 h-2 bg-primary-yellow rounded-full"></div>
-                <span>Performans Optimizasyonu</span>
-              </div>
+            <div className="flex flex-wrap justify-center gap-3">
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.1 }}
+                className="bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 px-6 py-3 rounded-full font-semibold text-sm shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+              >
+                Modern Teknolojiler
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.2 }}
+                className="bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 px-6 py-3 rounded-full font-semibold text-sm shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+              >
+                SEO Optimizasyonu
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.3 }}
+                className="bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 px-6 py-3 rounded-full font-semibold text-sm shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+              >
+                Güvenlik Standartları
+              </motion.div>
+              <motion.div
+                initial={{ opacity: 0, scale: 0.8 }}
+                whileInView={{ opacity: 1, scale: 1 }}
+                transition={{ delay: 0.4 }}
+                className="bg-gradient-to-r from-yellow-400 to-yellow-500 text-gray-900 px-6 py-3 rounded-full font-semibold text-sm shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
+              >
+                Performans Optimizasyonu
+              </motion.div>
             </div>
           </div>
         </motion.div>
