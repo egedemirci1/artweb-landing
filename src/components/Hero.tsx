@@ -45,7 +45,7 @@ export default function Hero() {
 
 
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-purple-100 via-pink-50 to-yellow-50 pt-20 md:pt-24">
+    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-purple-100 via-pink-50 to-yellow-50 pt-16 md:pt-24 pb-8">
       {/* Brush Stroke Animations */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Brush Stroke 1 */}
@@ -145,20 +145,20 @@ export default function Hero() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-20 items-center">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-20 items-center">
           {/* Sol Taraf - Mesaj Alanı */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.8 }}
-            className="space-y-8"
+            className="space-y-4 md:space-y-6"
           >
             {/* Ana Başlık */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.6 }}
-              className="space-y-6"
+              className="space-y-3 md:space-y-4"
             >
               <h1 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold leading-tight">
                 <span className="text-gray-900">Sanat gibi</span>
@@ -188,7 +188,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.6 }}
-              className="space-y-3"
+              className="space-y-2"
             >
               <div className="flex items-center space-x-2 text-sm md:text-base text-gray-700">
                 <Zap className="w-4 h-4 text-yellow-500" />
@@ -205,7 +205,7 @@ export default function Hero() {
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8, duration: 0.6 }}
-              className="flex flex-col sm:flex-row gap-4"
+              className="flex flex-col sm:flex-row gap-2 md:gap-3"
             >
               <motion.button
                 whileHover={{ scale: 1.05 }}

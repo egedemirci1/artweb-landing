@@ -200,7 +200,7 @@ export default function HeroRotatingCard() {
 
       {/* Card Container */}
       <div 
-        className="relative h-[500px] rounded-2xl overflow-hidden shadow-md"
+        className="relative h-[400px] md:h-[450px] lg:h-[500px] rounded-2xl overflow-hidden shadow-md"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
