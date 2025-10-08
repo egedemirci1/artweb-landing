@@ -10,35 +10,27 @@ interface QuotaProps {
 }
 
 export default function Quota({ type, onQuotaUpdate }: QuotaProps) {
-  // Sabit başlangıç değerleri
-  const [remaining, setRemaining] = useState(type === 'love' ? 7 : 9);
+  const [remaining, setRemaining] = useState(type === 'love' ? 8 : 10);
 
   useEffect(() => {
-    // 3 saniye sonra başla (sayfa yüklenmesini bekle)
-    const startTimer = setTimeout(() => {
-      const interval = setInterval(() => {
-        setRemaining(prev => {
-          // Eğer quota 1'e düştüyse, 6-9 arası rastgele sayı ata
-          if (prev <= 1) {
-            return Math.floor(Math.random() * 4) + 6; // 6-9 arası
-          }
-          
-          // %25 şansla azalt (sadece 2'den büyükse)
-          if (Math.random() < 0.25 && prev > 2) {
-            return prev - 1;
-          }
-          
-          return prev;
-        });
-      }, 45000); // 45 saniye
+    // Her 30 saniyede bir kontrol et
+    const interval = setInterval(() => {
+      setRemaining(prev => {
+        if (prev <= 1) {
+          return Math.floor(Math.random() * 4) + 7; // 7-10 arası
+        }
+        
+        if (Math.random() < 0.2 && prev > 3) {
+          return prev - 1;
+        }
+        
+        return prev;
+      });
+    }, 30000);
 
-      return () => clearInterval(interval);
-    }, 3000);
-
-    return () => clearTimeout(startTimer);
+    return () => clearInterval(interval);
   }, [type]);
 
-  // Quota'yı azaltma fonksiyonu
   const decreaseQuota = () => {
     setRemaining(prev => {
       if (prev > 0) {
@@ -49,7 +41,6 @@ export default function Quota({ type, onQuotaUpdate }: QuotaProps) {
       return prev;
     });
   };
-
 
   const isLowStock = remaining <= 2;
   const isOutOfStock = remaining === 0;
@@ -113,7 +104,7 @@ export default function Quota({ type, onQuotaUpdate }: QuotaProps) {
       <div className="w-full bg-gray-200 rounded-full h-2 mb-2">
         <motion.div
           initial={{ width: 0 }}
-          animate={{ width: `${(remaining / (type === 'love' ? 10 : 10)) * 100}%` }}
+          animate={{ width: `${(remaining / 10) * 100}%` }}
           transition={{ duration: 1, ease: "easeOut" }}
           className={`h-2 rounded-full ${
             isOutOfStock

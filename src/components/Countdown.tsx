@@ -9,56 +9,48 @@ interface CountdownProps {
 }
 
 export default function Countdown({ targetDate, onExpire }: CountdownProps) {
-  // Sabit başlangıç değerleri
   const [timeLeft, setTimeLeft] = useState({
-    days: 14,
-    hours: 12,
-    minutes: 35,
-    seconds: 42,
+    days: 15,
+    hours: 23,
+    minutes: 45,
+    seconds: 30,
     isExpired: false,
   });
 
   useEffect(() => {
-    // 2 saniye sonra başla (sayfa yüklenmesini bekle)
-    const startTimer = setTimeout(() => {
-      const timer = setInterval(() => {
-        setTimeLeft(prev => {
-          let { days, hours, minutes, seconds } = prev;
-          
-          // Saniye azalt
-          if (seconds > 0) {
-            seconds--;
-          } else if (minutes > 0) {
-            seconds = 59;
-            minutes--;
-          } else if (hours > 0) {
-            seconds = 59;
-            minutes = 59;
-            hours--;
-          } else if (days > 0) {
-            seconds = 59;
-            minutes = 59;
-            hours = 23;
-            days--;
-          } else {
-            // Süre doldu, yeni değerler ata
-            days = Math.floor(Math.random() * 5) + 12; // 12-16 gün
-            hours = Math.floor(Math.random() * 24); // 0-23 saat
-            minutes = Math.floor(Math.random() * 60); // 0-59 dakika
-            seconds = Math.floor(Math.random() * 60); // 0-59 saniye
-          }
-          
-          return { days, hours, minutes, seconds, isExpired: false };
-        });
-      }, 1000);
+    // Hemen başla
+    const timer = setInterval(() => {
+      setTimeLeft(prev => {
+        let { days, hours, minutes, seconds } = prev;
+        
+        if (seconds > 0) {
+          seconds--;
+        } else if (minutes > 0) {
+          seconds = 59;
+          minutes--;
+        } else if (hours > 0) {
+          seconds = 59;
+          minutes = 59;
+          hours--;
+        } else if (days > 0) {
+          seconds = 59;
+          minutes = 59;
+          hours = 23;
+          days--;
+        } else {
+          // Reset to 15 days
+          days = 15;
+          hours = 23;
+          minutes = 45;
+          seconds = 30;
+        }
+        
+        return { days, hours, minutes, seconds, isExpired: false };
+      });
+    }, 1000);
 
-      return () => clearInterval(timer);
-    }, 2000);
-
-    return () => clearTimeout(startTimer);
+    return () => clearInterval(timer);
   }, []);
-
-  // Artık expired durumu göstermiyoruz, sürekli güncelleniyor
 
   const timeUnits = [
     { label: 'Gün', value: timeLeft.days },
