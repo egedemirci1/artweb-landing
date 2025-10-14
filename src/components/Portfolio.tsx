@@ -81,7 +81,7 @@ export default function Portfolio() {
             Portföyümüz
           </h2>
           <p className="text-lg text-modern-silver max-w-2xl mx-auto">
-            Her proje bizim için bir sanat eseri. İşte yaratıcılığımızın birkaç örneği.
+            Gerçek hikayeleri dijitale taşımanın heyecanını yaşıyoruz. İşte bazı müşterilerimizin hayallerini nasıl gerçeğe dönüştürdüğümüz.
           </p>
         </motion.div>
 
@@ -208,11 +208,11 @@ export default function Portfolio() {
         >
           <div className="bg-gradient-to-r from-gray-800 to-gray-900 text-white rounded-2xl p-8 max-w-4xl mx-auto shadow-xl">
             <h3 className="text-2xl font-heading font-bold mb-4 text-white">
-              🎨 Sizin Projeniz Nasıl Görünecek?
+              ✨ Sizin Hikayeniz Nasıl Dijitale Dönüşecek?
             </h3>
             <p className="text-lg text-gray-200 mb-6">
-              Her proje benzersizdir. Sizin hikayenizi, tarzınızı ve ihtiyaçlarınızı 
-              yansıtan özel bir tasarım yaratıyoruz. Hazır şablon yok, sadece sanat var.
+              Her projeyi müşterimizin hikayesi, markasının ruhu ve vizyonu ile şekillendiriyoruz. 
+              Hazır şablonlar kullanmıyor, sizin için tamamen özgün tasarımlar yaratıyoruz.
             </p>
             <div className="flex flex-wrap justify-center gap-3">
               <motion.div

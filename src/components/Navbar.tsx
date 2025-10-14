@@ -27,8 +27,8 @@ export default function Navbar() {
   };
 
   const navItems = [
+    { label: 'Hizmetlerimiz', id: 'pricing' },
     { label: 'Portföy', id: 'portfolio' },
-    { label: 'Paketler', id: 'pricing' },
     { label: 'Yorumlar', id: 'testimonials' },
     { label: 'İletişim', id: 'contact' },
   ];
@@ -39,8 +39,8 @@ export default function Navbar() {
       animate={{ y: 0 }}
             className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
                 isScrolled
-                  ? 'bg-gradient-to-r from-indigo-900/95 via-purple-900/95 to-pink-900/95 backdrop-blur-md shadow-xl border-b border-white/20'
-                  : 'bg-gradient-to-r from-indigo-800/80 via-purple-800/80 to-pink-800/80 backdrop-blur-sm'
+                  ? 'bg-gradient-to-r from-indigo-900 via-purple-900 to-pink-900 shadow-xl border-b border-white/20'
+                  : 'bg-gradient-to-r from-indigo-800 via-purple-800 to-pink-800'
               }`}
     >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -90,7 +90,7 @@ export default function Navbar() {
               onClick={() => scrollToSection('contact')}
                       className="bg-gradient-to-r from-yellow-400 to-orange-500 text-white px-6 py-2 rounded-full font-semibold hover:shadow-lg transition-all duration-300"
             >
-              Hemen Başlayalım
+              Teklif Al
             </motion.button>
           </div>
 
@@ -119,7 +119,7 @@ export default function Navbar() {
           opacity: isMobileMenuOpen ? 1 : 0,
         }}
         transition={{ duration: 0.3 }}
-        className="md:hidden bg-gradient-to-r from-indigo-900/95 via-purple-900/95 to-pink-900/95 backdrop-blur-md shadow-lg overflow-hidden"
+        className="md:hidden bg-gradient-to-r from-indigo-900 via-purple-900 to-pink-900 shadow-lg overflow-hidden"
       >
         <div className="px-4 py-2 space-y-2">
           {navItems.map((item) => (
@@ -137,7 +137,7 @@ export default function Navbar() {
             onClick={() => scrollToSection('contact')}
             className="block w-full text-center py-3 bg-gradient-to-r from-yellow-400 to-orange-500 text-white rounded-lg font-semibold hover:shadow-lg transition-all duration-300"
           >
-            Hemen Başlayalım
+            Teklif Al
           </motion.button>
         </div>
       </motion.div>

@@ -33,8 +33,8 @@ export default function Footer() {
               />
             </div>
             <p className="text-gray-300 leading-relaxed text-sm">
-              Sanat gibi web siteleri yaratıyoruz. Her proje bizim için bir eser, 
-              her müşteri bizim için bir sanatçı.
+              Dijital dünyada iz bırakan, özgün web siteleri tasarlıyoruz. 
+              Her müşterimizin hikayesini, vizyonunu ve ruhunu dijitale taşıyoruz.
             </p>
             <div className="flex items-center space-x-2 text-sm text-gray-400">
               <Heart className="w-4 h-4 text-pink-500" />
@@ -55,8 +55,8 @@ export default function Footer() {
             </h4>
             <div className="space-y-2">
               {[
+                { label: 'Hizmetlerimiz', id: 'pricing' },
                 { label: 'Portföy', id: 'portfolio' },
-                { label: 'Paketler', id: 'pricing' },
                 { label: 'Yorumlar', id: 'testimonials' },
                 { label: 'SSS', id: 'faq' },
                 { label: 'İletişim', id: 'contact' },
@@ -108,7 +108,7 @@ export default function Footer() {
                   rel="noopener noreferrer"
                   className="text-gray-400 hover:text-white transition-colors text-sm"
                 >
-                  @artwebtr
+                  @artweb.tr
                 </a>
               </div>
             </div>

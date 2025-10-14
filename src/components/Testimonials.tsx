@@ -84,7 +84,7 @@ export default function Testimonials() {
             Müşteri Yorumları
           </h2>
           <p className="text-lg text-primary-gray max-w-2xl mx-auto">
-            Mutlu müşterilerimizin deneyimleri. Her proje bizim için bir başarı hikayesi.
+            Müşterilerimizin güveni ve memnuniyeti bizi ayakta tutuyor. İşte onların gerçek deneyimleri ve hikayeleri.
           </p>
         </motion.div>
 
@@ -201,7 +201,7 @@ export default function Testimonials() {
               viewport={{ once: true }}
               className="text-4xl font-bold text-primary-yellow mb-2"
             >
-              1 Hafta
+              7 Gün
             </motion.div>
             <div className="text-primary-gray font-medium">Ortalama Teslim Süresi</div>
           </div>
@@ -230,28 +230,28 @@ export default function Testimonials() {
         >
           <div className="bg-gradient-to-r from-primary-yellow to-yellow-400 text-primary-black rounded-2xl p-8 max-w-4xl mx-auto">
             <h3 className="text-2xl font-heading font-bold mb-4">
-              💬 Siz de Memnun Müşterilerimizden Biri Olun
+              🌟 Bir Sonraki Başarı Hikayesi Sizin Olabilir
             </h3>
             <p className="text-lg mb-6">
-              Müşterilerimizin mutluluğu bizim en büyük motivasyonumuz. 
-              Sizin projeniz de başarı hikayelerimizden biri olabilir.
+              Her müşterimizle uzun soluklu bir dostluk kuruyoruz. Güven, şeffaflık ve kalite ile çalışıyoruz. 
+              Sizin hikayenizi de birlikte yazmaya hazırız.
             </p>
             <div className="flex flex-wrap justify-center gap-4 text-sm text-primary-black">
               <div className="flex items-center space-x-2">
                 <Star className="w-4 h-4 text-primary-black" />
-                <span>5 Yıldız Hizmet</span>
+                <span>Özgün Tasarım</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Star className="w-4 h-4 text-primary-black" />
-                <span>Kişisel Yaklaşım</span>
+                <span>Şeffaf İletişim</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Star className="w-4 h-4 text-primary-black" />
-                <span>Hızlı İletişim</span>
+                <span>Zamanında Teslim</span>
               </div>
               <div className="flex items-center space-x-2">
                 <Star className="w-4 h-4 text-primary-black" />
-                <span>Sürekli Destek</span>
+                <span>Güvenilir Destek</span>
               </div>
             </div>
           </div>

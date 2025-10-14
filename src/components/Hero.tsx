@@ -6,31 +6,36 @@ import { Zap, CheckCircle } from 'lucide-react';
 import HeroRotatingCard from './HeroRotatingCard';
 
 const typingTexts = [
-  'Sevgiline özel 💛',
-  'Şirketine özel 🏢',
-  'Sanat gibi tasarımlar 🎨',
-  'Hızlı teslim garantisi ⚡',
+  { text: 'Sevgiline özel', emoji: '💛' },
+  { text: 'Şirketine özel', emoji: '🏢' },
+  { text: 'Sanat gibi tasarımlar', emoji: '🎨' },
+  { text: 'Hızlı teslim garantisi', emoji: '⚡' },
 ];
 
 export default function Hero() {
   const [typingText, setTypingText] = useState('');
   const [currentTypingIndex, setCurrentTypingIndex] = useState(0);
   const [isTyping, setIsTyping] = useState(true);
+  const [showEmoji, setShowEmoji] = useState(false);
 
   // Typing animation
   useEffect(() => {
-    const currentText = typingTexts[currentTypingIndex];
+    const currentItem = typingTexts[currentTypingIndex];
+    const currentText = currentItem.text;
     
     if (isTyping) {
       if (typingText.length < currentText.length) {
+        setShowEmoji(false);
         const timeout = setTimeout(() => {
           setTypingText(currentText.slice(0, typingText.length + 1));
         }, 80);
         return () => clearTimeout(timeout);
       } else {
+        setShowEmoji(true);
         setTimeout(() => setIsTyping(false), 2500);
       }
     } else {
+      setShowEmoji(false);
       if (typingText.length > 0) {
         const timeout = setTimeout(() => {
           setTypingText(typingText.slice(0, -1));
@@ -45,7 +50,7 @@ export default function Hero() {
 
 
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-purple-100 via-pink-50 to-yellow-50 pt-16 md:pt-24 pb-8">
+    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-purple-100 via-pink-50 to-yellow-50 pt-24 md:pt-32 pb-8">
       {/* Brush Stroke Animations */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Brush Stroke 1 */}
@@ -145,22 +150,22 @@ export default function Hero() {
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 md:gap-12 lg:gap-20 items-center">
-          {/* Sol Taraf - Mesaj Alanı */}
+        <div className="flex flex-col items-center lg:grid lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-stretch">
+          {/* Başlık Alanı - Mobilde Ortalı */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            animate={{ opacity: 1, x: 0 }}
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8 }}
-            className="space-y-4 md:space-y-6"
+            className="w-full text-center lg:text-left space-y-6 md:space-y-8 lg:space-y-10 flex flex-col justify-center"
           >
             {/* Ana Başlık */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2, duration: 0.6 }}
-              className="space-y-3 md:space-y-4"
+              className="space-y-4 lg:space-y-6"
             >
-              <h1 className="text-3xl md:text-4xl lg:text-5xl font-heading font-bold leading-tight">
+              <h1 className="text-4xl sm:text-5xl md:text-5xl lg:text-6xl xl:text-7xl font-heading font-bold leading-tight">
                 <span className="text-gray-900">Sanat gibi</span>
                 <br />
                 <span className="bg-gradient-to-r from-purple-600 to-yellow-500 bg-clip-text text-transparent">
@@ -169,9 +174,19 @@ export default function Hero() {
               </h1>
               
               {/* Güçlü Typing Animation */}
-              <div className="text-lg md:text-xl font-semibold min-h-[2rem]">
+              <div className="text-xl sm:text-2xl md:text-2xl lg:text-3xl xl:text-4xl font-semibold min-h-[2.5rem]">
                 <span className="text-gray-800">
                   {typingText}
+                  {showEmoji && (
+                    <motion.span
+                      initial={{ opacity: 0, scale: 0.5 }}
+                      animate={{ opacity: 1, scale: 1 }}
+                      transition={{ duration: 0.3 }}
+                      className="ml-2 emoji"
+                    >
+                      {typingTexts[currentTypingIndex].emoji}
+                    </motion.span>
+                  )}
                   <motion.span
                     animate={{ opacity: [1, 0, 1] }}
                     transition={{ duration: 1, repeat: Infinity }}
@@ -183,35 +198,35 @@ export default function Hero() {
               </div>
             </motion.div>
 
-            {/* Güven Veren Satırlar */}
+            {/* Güven Veren Satırlar - Sadece Desktop */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.6, duration: 0.6 }}
-              className="space-y-2"
+              className="hidden lg:block space-y-3"
             >
-              <div className="flex items-center space-x-2 text-sm md:text-base text-gray-700">
-                <Zap className="w-4 h-4 text-yellow-500" />
-                <span className="font-medium">1 hafta içinde teslim 🚀</span>
+              <div className="flex items-center space-x-3 text-lg lg:text-xl text-gray-700">
+                <Zap className="w-6 h-6 lg:w-7 lg:h-7 text-yellow-500" />
+                <span className="font-medium">7 gün içinde teslim garantisi</span>
               </div>
-              <div className="flex items-center space-x-2 text-sm md:text-base text-gray-700">
-                <CheckCircle className="w-4 h-4 text-green-500" />
-                <span className="font-medium">Mobil uyumlu + özel tasarım</span>
+              <div className="flex items-center space-x-3 text-lg lg:text-xl text-gray-700">
+                <CheckCircle className="w-6 h-6 lg:w-7 lg:h-7 text-green-500" />
+                <span className="font-medium">Responsive tasarım & SEO optimizasyonu</span>
               </div>
             </motion.div>
 
-            {/* CTA Buttons */}
+            {/* CTA Buttons - Sadece Desktop */}
             <motion.div
               initial={{ opacity: 0, y: 30 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.8, duration: 0.6 }}
-              className="flex flex-col sm:flex-row gap-2 md:gap-3"
+              className="hidden lg:flex flex-col sm:flex-row gap-3 md:gap-4"
             >
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => window.open('https://www.instagram.com/artweb.tr', '_blank')}
-                className="group border-2 border-gray-800 bg-white text-gray-800 px-4 py-2 md:px-6 md:py-3 rounded-full font-semibold text-sm md:text-base hover:bg-gray-50 transition-all duration-300 shadow-lg"
+                className="group border-2 border-gray-800 bg-white text-gray-800 px-6 py-3 lg:px-8 lg:py-4 rounded-full font-semibold text-base lg:text-lg hover:bg-gray-50 transition-all duration-300 shadow-lg"
               >
                 <span>Siteni Özelleştir</span>
               </motion.button>
@@ -220,19 +235,19 @@ export default function Hero() {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 onClick={() => window.open('https://wa.me/905356281306?text=Merhaba,%20web%20sitesi%20hakkında%20bilgi%20almak%20istiyorum.', '_blank')}
-                className="group bg-gradient-to-r from-yellow-400 to-yellow-500 text-white px-4 py-2 md:px-6 md:py-3 rounded-full font-semibold text-sm md:text-base hover:shadow-xl transition-all duration-300 shadow-lg"
+                className="group bg-gradient-to-r from-yellow-400 to-yellow-500 text-white px-6 py-3 lg:px-8 lg:py-4 rounded-full font-semibold text-base lg:text-lg hover:shadow-xl transition-all duration-300 shadow-lg"
               >
                 <span>Hemen Başlayalım</span>
               </motion.button>
             </motion.div>
           </motion.div>
 
-          {/* Sağ Taraf - Rotating Card */}
+          {/* Rotating Card - Mobilde Altında ve Büyük */}
           <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="w-full flex items-center justify-center"
           >
             <HeroRotatingCard />
           </motion.div>

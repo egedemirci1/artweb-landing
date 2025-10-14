@@ -7,7 +7,7 @@ const benefits = [
   {
     icon: Palette,
     title: 'Özel Tasarım',
-    description: 'Hazır şablon yok, tamamen sana özel tasarım. Her proje benzersiz ve kişisel.',
+    description: 'Hazır kalıplara sığmıyoruz. Markanızın ruhunu yansıtan, size özel tasarımlarla dijital kimliğinizi baştan yaratıyoruz.',
     color: 'text-white',
     bgColor: 'bg-gradient-to-br from-pink-500 to-rose-600',
     borderColor: 'border-pink-500',
@@ -15,7 +15,7 @@ const benefits = [
   {
     icon: Zap,
     title: 'Hızlı Teslim',
-    description: 'Sadece 1 hafta içinde teslim. Hızlı ama kaliteli, aceleci ama özenli.',
+    description: 'Zamanınızın değerini biliyoruz. Kaliteden ödün vermeden, projelerinizi belirlenen süre içinde eksiksiz teslim ediyoruz.',
     color: 'text-white',
     bgColor: 'bg-gradient-to-br from-yellow-500 to-orange-500',
     borderColor: 'border-yellow-500',
@@ -23,7 +23,7 @@ const benefits = [
   {
     icon: Smartphone,
     title: 'Mobil Uyumlu',
-    description: 'Tüm cihazlarda mükemmel görünüm. Responsive tasarım garantisi.',
+    description: 'Kullanıcılarınız nerede olursa olsun, web siteniz her ekranda kusursuz bir deneyim sunar. Responsive tasarım garantisi.',
     color: 'text-white',
     bgColor: 'bg-gradient-to-br from-blue-500 to-cyan-500',
     borderColor: 'border-blue-500',
@@ -31,7 +31,7 @@ const benefits = [
   {
     icon: Headphones,
     title: 'Destek & Revizyon',
-    description: 'Küçük revizyonlar ücretsiz. Sürekli destek ve iletişim.',
+    description: 'Projeniz tamamlandıktan sonra da yanınızdayız. Küçük güncellemeleri ücretsiz sağlıyor, sürekli destek sunuyoruz.',
     color: 'text-white',
     bgColor: 'bg-gradient-to-br from-green-500 to-emerald-500',
     borderColor: 'border-green-500',
@@ -73,7 +73,7 @@ export default function Benefits() {
               Neden ArtWeb.tr?
             </h2>
             <p className="text-lg text-gray-200 max-w-2xl mx-auto">
-              Sadece kod yazmıyoruz, sanat yaratıyoruz. Her proje bizim için bir eser.
+              Biz sadece kod yazmıyoruz, dijital dünyada iz bırakan sanat eserleri yaratıyoruz. Her projeniz, sizin hikayenizi anlatan eşsiz bir başyapıt.
             </p>
           </div>
         </motion.div>
@@ -152,8 +152,7 @@ export default function Benefits() {
               🎯 Hedefimiz: Mükemmellik
             </h3>
             <p className="text-lg text-gray-700 mb-6">
-              Sadece web sitesi yapmıyoruz, dijital deneyim yaratıyoruz. 
-              Her proje bizim için bir sanat eseri, her müşteri bizim için bir sanatçı.
+              Bizim için hedef sadece bir web sitesi inşa etmek değil, markanız için unutulmaz dijital deneyimler yaratmaktır. Her projeyi bir sanat eseri titizliğiyle ele alır, her müşterimizin benzersiz vizyonunu dijital dünyaya taşırız.
             </p>
             <div className="flex flex-wrap justify-center gap-3">
               <motion.div

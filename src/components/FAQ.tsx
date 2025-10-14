@@ -88,7 +88,7 @@ export default function FAQ() {
             Sıkça Sorulan Sorular
           </h2>
           <p className="text-lg text-primary-gray max-w-2xl mx-auto">
-            Merak ettiğiniz her şey burada. Sorularınızın cevaplarını bulamazsanız bizimle iletişime geçin.
+            Aklınızdaki tüm soruların yanıtlarını burada bulabilirsiniz. Başka bir sorunuz varsa, her zaman yanıtlamaktan mutluluk duyarız.
           </p>
         </motion.div>
 

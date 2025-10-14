@@ -35,10 +35,10 @@ export default function LeadForm() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-heading font-bold text-primary-black mb-4">
-            Instagram&apos;da Takip Edin
+            Bize Ulaşın
           </h2>
           <p className="text-lg text-primary-gray max-w-2xl mx-auto">
-            Çalışmalarımızı, müşteri deneyimlerini ve güncel projelerimizi Instagram&apos;da takip edebilirsiniz.
+            Projeleriniz için bizimle iletişime geçin. Size en uygun çözümü birlikte bulalım.
           </p>
         </motion.div>
 
@@ -91,7 +91,7 @@ export default function LeadForm() {
 
               <div className="mt-6 p-4 bg-gradient-to-r from-purple-50 to-pink-50 rounded-lg border border-purple-200">
                 <p className="text-sm text-purple-800">
-                  <strong>💡 İpucu:</strong> Instagram&apos;da son projelerimizi ve müşteri deneyimlerini görebilirsiniz!
+                  <strong>💡 İpucu:</strong> En hızlı dönüş için WhatsApp üzerinden iletişime geçebilirsiniz!
                 </p>
               </div>
             </div>
@@ -141,7 +141,7 @@ export default function LeadForm() {
                   height="600"
                   frameBorder="0"
                   scrolling="no"
-                  allowtransparency="true"
+                  allowTransparency={true}
                   className="rounded-lg"
                   title="Instagram Profile"
                 ></iframe>

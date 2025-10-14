@@ -86,7 +86,7 @@ export default function Pricing() {
           className="text-center mb-16"
         >
           <h2 className="text-3xl md:text-4xl font-heading font-bold text-primary-black mb-4">
-            Paketlerimiz
+            Hizmetlerimiz
           </h2>
           <p className="text-lg text-primary-gray max-w-2xl mx-auto mb-6">
             Açılışa özel fiyatlarımızla hayalinizdeki web sitesine sahip olun.
@@ -95,7 +95,7 @@ export default function Pricing() {
           {/* Disclaimer */}
           <div className="bg-yellow-50 border border-yellow-200 rounded-lg p-4 max-w-md mx-auto">
             <p className="text-sm text-yellow-800">
-              <strong>*Liste fiyatı, kampanya bitince geçerlidir.</strong>
+              <strong>* Kampanya süreci sonunda liste fiyatı uygulanacaktır.</strong>
             </p>
           </div>
         </motion.div>
@@ -195,7 +195,7 @@ export default function Pricing() {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  onClick={(e) => {
+                  onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
                     e.preventDefault();
                     e.stopPropagation();
                     if (pkg.id === 'love') {
@@ -241,11 +241,11 @@ export default function Pricing() {
         >
           <div className="bg-gradient-to-r from-primary-yellow to-yellow-400 text-primary-black rounded-2xl p-8 max-w-4xl mx-auto">
             <h3 className="text-2xl font-heading font-bold mb-4">
-              🎯 Özel Projeler İçin Özel Fiyatlar
+              💫 Farklı Bir Hayaliniz Mi Var?
             </h3>
             <p className="text-lg mb-6">
-              Standart paketlerimiz size uygun değil mi? Özel ihtiyaçlarınız için 
-              özel çözümler sunuyoruz. E-ticaret, blog, portföy sitesi ve daha fazlası...
+              Sevgilinize özel bir sürpriz, kurumsal bir web sitesi veya düğününüz için dijital davetiye... 
+              Her özel anınız ve hayaliniz için size özel çözümler üretiyoruz. Hikayenizi birlikte dijitale taşıyalım!
             </p>
             <motion.button
               whileHover={{ scale: 1.05 }}
@@ -253,7 +253,7 @@ export default function Pricing() {
               onClick={() => window.open('https://www.instagram.com/artweb.tr', '_blank')}
               className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-8 py-3 rounded-full font-semibold hover:shadow-lg transition-all duration-300 shadow-md"
             >
-              Özel Proje Başlat
+              Projenizi Paylaşın
             </motion.button>
           </div>
         </motion.div>

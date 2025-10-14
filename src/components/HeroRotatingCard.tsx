@@ -63,7 +63,7 @@ const cardData = [
   },
   {
     id: 'wedding',
-    tag: 'Düğün & Nişan Davetiyesi',
+    tag: 'Düğün Davetiyesi',
     description: 'Davetiyeler, geri sayım ve fotoğraf galerisiyle etkinliğinizi şık bir şekilde paylaşın.',
     icon: Calendar,
     priceNow: 4500,
@@ -124,13 +124,9 @@ export default function HeroRotatingCard() {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [touchStart, setTouchStart] = useState<number | null>(null);
   const [touchEnd, setTouchEnd] = useState<number | null>(null);
-  const [timeRemaining, setTimeRemaining] = useState({
-    days: '00',
-    hours: '00', 
-    minutes: '00',
-    seconds: '00',
-    total: 0
-  });
+  const [timeRemaining, setTimeRemaining] = useState(() => 
+    getTimeRemaining(cardData[0].endDate, cardData[0].id)
+  );
 
   // Real-time countdown
   useEffect(() => {
@@ -148,7 +144,7 @@ export default function HeroRotatingCard() {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % cardData.length);
-    }, 5000);
+    }, 4000);
 
     return () => clearInterval(interval);
   }, [currentIndex]);
@@ -196,31 +192,31 @@ export default function HeroRotatingCard() {
   const currentCard = cardData[currentIndex];
 
   return (
-    <div className="relative w-full max-w-md mx-auto">
+    <div className="relative w-full max-w-6xl mx-auto">
 
       {/* Card Container */}
       <div 
-        className="relative h-[400px] md:h-[450px] lg:h-[500px] rounded-2xl overflow-hidden shadow-md"
+        className="relative h-[500px] sm:h-[480px] md:h-[500px] lg:h-[580px] xl:h-[680px] rounded-2xl overflow-hidden shadow-lg"
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
       >
-        <AnimatePresence mode="wait">
+        <AnimatePresence mode="sync">
           <motion.div
             key={currentCard.id}
             initial={{ opacity: 0, x: 100 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -100 }}
-            transition={{ duration: 0.6, ease: "easeInOut" }}
-            className="absolute inset-0 bg-white rounded-2xl shadow-md p-6 sm:p-7 flex flex-col"
+            transition={{ duration: 0.4, ease: "easeInOut" }}
+            className="absolute inset-0 bg-white rounded-2xl shadow-md p-4 sm:p-5 md:p-6 lg:p-7 xl:p-9 flex flex-col justify-between"
           >
             {/* Header - Centered */}
-            <div className="text-center">
-              <div className="flex items-center justify-center space-x-3 mb-2">
-                <div className={`p-2 rounded-lg ${currentCard.bgColor}`}>
-                  <currentCard.icon className="w-6 h-6 text-white stroke-2" />
+            <div className="text-center flex-shrink-0">
+              <div className="flex items-center justify-center gap-2 lg:gap-2.5 mb-2 lg:mb-3 flex-wrap px-2">
+                <div className={`p-1.5 lg:p-2.5 rounded-lg ${currentCard.bgColor} flex-shrink-0`}>
+                  <currentCard.icon className="w-5 h-5 lg:w-7 lg:h-7 xl:w-9 xl:h-9 text-white stroke-2" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-800">{currentCard.tag}</h3>
+                <h3 className="text-base sm:text-lg md:text-xl lg:text-2xl xl:text-3xl font-bold text-gray-800 leading-tight">{currentCard.tag}</h3>
               </div>
               
               {/* Campaign Badge - Centered and Close to Title */}
@@ -228,9 +224,9 @@ export default function HeroRotatingCard() {
                 currentCard.id === 'love' ? 'bg-pink-600' :
                 currentCard.id === 'corporate' ? 'bg-indigo-600' :
                 'bg-rose-600'
-              } text-white px-3 py-1 rounded-full text-center inline-block mb-4`}>
-                <div className="flex items-center space-x-2 text-sm">
-                  <Clock className="w-4 h-4 stroke-2" />
+              } text-white px-2.5 lg:px-3.5 py-1 lg:py-1.5 rounded-full text-center inline-flex items-center mb-2 lg:mb-3 max-w-full`}>
+                <div className="flex items-center space-x-1.5 lg:space-x-2 text-[10px] sm:text-xs lg:text-sm xl:text-base whitespace-nowrap">
+                  <Clock className="w-3 h-3 lg:w-4 lg:h-4 xl:w-5 xl:h-5 stroke-2 flex-shrink-0" />
                   <span className="font-semibold">
                     {timeRemaining.days}:{timeRemaining.hours}:{timeRemaining.minutes}:{timeRemaining.seconds}
                   </span>
@@ -240,75 +236,84 @@ export default function HeroRotatingCard() {
               </div>
 
               {/* Description - Between Title and Features */}
-              <p className="text-sm text-neutral-600 leading-relaxed px-4">
+              <p className="text-[11px] sm:text-xs lg:text-sm xl:text-base text-neutral-600 leading-relaxed px-1 lg:px-2 mb-2 lg:mb-3">
                 {currentCard.description}
               </p>
-            </div>
+            </div> 
 
             {/* Content Area - Centered in Remaining Space */}
-            <div className="flex-1 flex flex-col justify-center">
-              {/* Features - 3 Items - Larger Text - Group Centered, Items Left Aligned */}
-              <div className="space-y-3 flex flex-col items-center">
+            <div className="flex flex-col justify-center py-1 lg:py-2">
+              {/* Features - Modern Badge Design */}
+              <div className="flex flex-wrap justify-center gap-2 lg:gap-3 xl:gap-4 max-w-lg mx-auto px-2">
                 {currentCard.features.map((feature, index) => (
                   <motion.div
                     key={feature.text}
-                    initial={{ opacity: 0, x: -20 }}
-                    animate={{ opacity: 1, x: 0 }}
-                    transition={{ delay: index * 0.1 + 0.3, duration: 0.4 }}
-                    className="flex items-center gap-3 text-base text-neutral-700"
+                    initial={{ opacity: 0, scale: 0.8 }}
+                    animate={{ opacity: 1, scale: 1 }}
+                    transition={{ delay: index * 0.05 + 0.15, duration: 0.3 }}
+                    className={`flex items-center gap-1.5 lg:gap-2 px-3 lg:px-4 xl:px-5 py-2 lg:py-2.5 xl:py-3 rounded-full ${
+                      currentCard.id === 'love' ? 'bg-pink-50 border-2 border-pink-200' :
+                      currentCard.id === 'corporate' ? 'bg-indigo-50 border-2 border-indigo-200' :
+                      'bg-rose-50 border-2 border-rose-200'
+                    } shadow-sm hover:shadow-md transition-all duration-300`}
                   >
-                    <div className="w-5 h-5 flex items-center justify-center">
-                      <feature.icon className={`w-5 h-5 ${
-                        currentCard.id === 'love' ? 'text-pink-600' :
-                        currentCard.id === 'corporate' ? 'text-indigo-600' :
-                        'text-rose-600'
-                      } stroke-2`} />
-                    </div>
-                    <span>{feature.text}</span>
+                    <feature.icon className={`w-3.5 h-3.5 lg:w-4 lg:h-4 xl:w-5 xl:h-5 ${
+                      currentCard.id === 'love' ? 'text-pink-600' :
+                      currentCard.id === 'corporate' ? 'text-indigo-600' :
+                      'text-rose-600'
+                    } stroke-2 flex-shrink-0`} />
+                    <span className={`text-[11px] sm:text-xs lg:text-sm xl:text-base font-semibold ${
+                      currentCard.id === 'love' ? 'text-pink-700' :
+                      currentCard.id === 'corporate' ? 'text-indigo-700' :
+                      'text-rose-700'
+                    } whitespace-nowrap`}>{feature.text}</span>
                   </motion.div>
                 ))}
               </div>
             </div>
 
-            {/* Price - Above Button */}
-            <div className="text-center mb-4">
-              <div className="flex items-center justify-center space-x-3">
-                <span className="text-4xl font-bold text-gray-900">
-                  {formatPrice(currentCard.priceNow)}
-                </span>
-                <span className="text-lg text-neutral-400 line-through">
-                  {formatPrice(currentCard.priceOld)}
-                </span>
+            {/* Price & Button Section */}
+            <div className="flex-shrink-0">
+              {/* Price - Above Button */}
+              <div className="text-center mb-3 lg:mb-4">
+                <div className="flex items-center justify-center space-x-2 lg:space-x-2.5 flex-wrap">
+                  <span className="text-xl sm:text-2xl lg:text-4xl xl:text-5xl font-bold text-gray-900">
+                    {formatPrice(currentCard.priceNow)}
+                  </span>
+                  <span className="text-sm sm:text-base lg:text-xl xl:text-2xl text-neutral-400 line-through">
+                    {formatPrice(currentCard.priceOld)}
+                  </span>
+                </div>
               </div>
-            </div>
 
-            {/* CTA Button - Full Width */}
-            <motion.button
-              whileHover={{ scale: 1.02 }}
-              whileTap={{ scale: 0.98 }}
-              onClick={() => scrollToSection('contact')}
-              className={`w-full ${
-                currentCard.id === 'love' ? 'bg-pink-600 hover:bg-pink-700' :
-                currentCard.id === 'corporate' ? 'bg-indigo-600 hover:bg-indigo-700' :
-                'bg-rose-600 hover:bg-rose-700'
-              } text-white px-6 py-3 rounded-lg font-semibold text-lg hover:shadow-lg transition-all duration-300 flex items-center justify-center space-x-2`}
-            >
-              <span>{currentCard.ctaText}</span>
-              <ArrowRight className="w-5 h-5 stroke-2" />
-            </motion.button>
+              {/* CTA Button - Full Width */}
+              <motion.button
+                whileHover={{ scale: 1.02 }}
+                whileTap={{ scale: 0.98 }}
+                onClick={() => scrollToSection('contact')}
+                className={`w-full ${
+                  currentCard.id === 'love' ? 'bg-pink-600 hover:bg-pink-700' :
+                  currentCard.id === 'corporate' ? 'bg-indigo-600 hover:bg-indigo-700' :
+                  'bg-rose-600 hover:bg-rose-700'
+                } text-white px-4 py-2.5 lg:px-5 lg:py-3 xl:px-7 xl:py-4 rounded-lg font-semibold text-sm sm:text-base lg:text-lg xl:text-xl hover:shadow-lg transition-all duration-300 flex items-center justify-center space-x-2`}
+              >
+                <span className="truncate">{currentCard.ctaText}</span>
+                <ArrowRight className="w-4 h-4 lg:w-5 lg:h-5 xl:w-6 xl:h-6 stroke-2 flex-shrink-0" />
+              </motion.button>
+            </div>
           </motion.div>
         </AnimatePresence>
       </div>
 
       {/* Pagination Dots */}
-      <div className="flex justify-center space-x-2 mt-6">
+      <div className="flex justify-center space-x-2.5 lg:space-x-3 mt-4 lg:mt-6">
         {cardData.map((_, index) => (
           <button
             key={index}
             onClick={() => {
               setCurrentIndex(index);
             }}
-            className={`w-3 h-3 rounded-full transition-all duration-300 ${
+            className={`w-2.5 h-2.5 sm:w-3 sm:h-3 lg:w-3.5 lg:h-3.5 rounded-full transition-all duration-300 ${
               index === currentIndex 
                 ? 'bg-gray-800 scale-125' 
                 : 'bg-gray-300 hover:bg-gray-400'
