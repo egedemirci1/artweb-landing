@@ -6,43 +6,43 @@ import { ExternalLink, Heart, Building2, Palette } from 'lucide-react';
 const portfolioItems = [
   {
     id: 1,
-    title: 'Aşkın Dijital Hikayesi',
-    category: 'Sevgiliye Özel',
+    title: 'Ahu & Yaman',
+    category: 'Sevdiğinize Özel',
     description: 'Romantik bir çiftin ilişki kronolojisi, şifreli mektuplar ve özel anılar.',
-    image: '/api/placeholder/600/400',
+    image: '/sevgiliyesite.png',
     icon: Heart,
     color: 'from-pink-500 to-rose-500',
     features: ['İlişki Kronolojisi', 'Şifreli Mektuplar', 'Fotoğraf Galerisi'],
   },
   {
     id: 2,
-    title: 'Modern Kurumsal Kimlik',
+    title: 'Erdem Prefabrik',
     category: 'Kurumsal',
     description: 'Teknoloji şirketi için profesyonel ve modern web sitesi tasarımı.',
-    image: '/api/placeholder/600/400',
+    image: '/krumsalsite.png',
     icon: Building2,
     color: 'from-blue-500 to-cyan-500',
     features: ['Modern Tasarım', 'SEO Optimizasyonu', 'İletişim Formu'],
   },
   {
     id: 3,
-    title: 'Sanatçı Portföy Sitesi',
-    category: 'Özel Proje',
-    description: 'Yerel sanatçı için kişisel portföy ve galeri sitesi.',
-    image: '/api/placeholder/600/400',
+    title: 'Yağmur & Berk',
+    category: 'Özel Gün',
+    description: 'Hayatınızın en özel gününü dijital ortamda paylaşın.',
+    image: '/dügünvenisan.png',
     icon: Palette,
     color: 'from-purple-500 to-indigo-500',
-    features: ['Galeri Sistemi', 'Eser Detayları', 'İletişim'],
+    features: ['Geri Sayım', 'Fotoğraf Galerisi', 'Katılım Formu'],
   },
   {
     id: 4,
-    title: 'Daha Fazla Örnek Yakında',
-    category: 'Gelişiyor',
-    description: 'Yeni projelerimiz yakında burada olacak. Takip etmeye devam edin!',
-    image: '/api/placeholder/600/400',
+    title: 'Yeni Referanslar Yakında',
+    category: 'Çok Yakında',
+    description: 'Yeni projelerimiz üzerinde çalışıyoruz. Takipte kalın!',
+    image: '',
     icon: Palette,
     color: 'from-gray-400 to-gray-600',
-    features: ['Yakında', 'Gelişiyor', 'Çok Yakında'],
+    features: ['Yeni Projeler', 'Geliştirilme Aşamasında', 'Heyecan Verici İçerikler'],
     comingSoon: true,
   },
 ];
@@ -101,56 +101,68 @@ export default function Portfolio() {
               }}
               className="group relative bg-white rounded-2xl shadow-lg overflow-hidden border border-gray-200"
             >
-              {/* Image Placeholder */}
+              {/* Image */}
               <div className="relative h-64 bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden">
-                <motion.div
-                  whileHover={{ scale: 1.1 }}
-                  transition={{ duration: 0.3 }}
-                  className="w-full h-full bg-gradient-to-br from-gray-200 to-gray-300 flex items-center justify-center"
-                >
-                  <div className="text-center text-gray-500">
-                    <item.icon className="w-16 h-16 mx-auto mb-4 opacity-50" />
-                    <p className="text-sm font-medium">Proje Görseli</p>
-                    <p className="text-xs">Yakında yüklenecek</p>
+                {item.comingSoon ? (
+                  // Blur Cam Efekti - 4. Kutu
+                  <div className="w-full h-full relative backdrop-blur-3xl bg-gradient-to-br from-white/30 via-white/20 to-white/10">
+                    <div className="absolute inset-0 bg-gradient-to-br from-purple-200/30 via-pink-200/20 to-rose-200/30 backdrop-blur-3xl"></div>
+                    <div className="relative flex items-center justify-center h-full">
+                      <div className="text-center text-gray-700">
+                        <motion.div
+                          animate={{ 
+                            scale: [1, 1.1, 1],
+                            rotate: [0, 5, -5, 0]
+                          }}
+                          transition={{ duration: 3, repeat: Infinity, ease: "easeInOut" }}
+                          className="mb-4"
+                        >
+                          <item.icon className="w-20 h-20 mx-auto text-gray-400" />
+                        </motion.div>
+                        <p className="text-2xl font-bold mb-2">Yeni Referanslar</p>
+                        <p className="text-lg">Yakında Burada!</p>
+                      </div>
+                    </div>
                   </div>
-                </motion.div>
+                ) : (
+                  // Gerçek Fotoğraflar
+                  <motion.div
+                    whileHover={{ scale: 1.05 }}
+                    transition={{ duration: 0.3 }}
+                    className="w-full h-full"
+                  >
+                    <img 
+                      src={item.image} 
+                      alt={item.title}
+                      className="w-full h-full object-cover"
+                    />
+                  </motion.div>
+                )}
 
                 {/* Category Badge */}
-                <div className="absolute top-4 left-4">
-                  <span className={`bg-gradient-to-r ${item.color} text-white px-3 py-1 rounded-full text-sm font-semibold`}>
+                <div className="absolute top-4 left-4 z-10">
+                  <span className={`bg-gradient-to-r ${item.color} text-white px-3 py-1 rounded-full text-sm font-semibold shadow-lg`}>
                     {item.category}
                   </span>
                 </div>
 
-                {/* Coming Soon Overlay */}
-                {item.comingSoon && (
-                  <div className="absolute inset-0 bg-black/50 flex items-center justify-center">
-                    <div className="text-center text-white">
-                      <motion.div
-                        animate={{ rotate: 360 }}
-                        transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
-                        className="w-16 h-16 border-4 border-white border-t-transparent rounded-full mx-auto mb-4"
-                      />
-                      <p className="text-lg font-semibold">Yakında</p>
-                    </div>
-                  </div>
-                )}
-
-                {/* Hover Overlay */}
-                <motion.div
-                  initial={{ opacity: 0 }}
-                  whileHover={{ opacity: 1 }}
-                  className="absolute inset-0 bg-black/50 flex items-center justify-center"
-                >
-                  <motion.button
-                    whileHover={{ scale: 1.1 }}
-                    whileTap={{ scale: 0.9 }}
-                    className="bg-white text-primary-black px-6 py-3 rounded-full font-semibold flex items-center space-x-2"
+                {/* Hover Overlay - Sadece gerçek fotoğraflar için */}
+                {!item.comingSoon && (
+                  <motion.div
+                    initial={{ opacity: 0 }}
+                    whileHover={{ opacity: 1 }}
+                    className="absolute inset-0 bg-black/60 flex items-center justify-center backdrop-blur-sm"
                   >
-                    <ExternalLink className="w-4 h-4" />
-                    <span>Detayları Gör</span>
-                  </motion.button>
-                </motion.div>
+                    <motion.button
+                      whileHover={{ scale: 1.1 }}
+                      whileTap={{ scale: 0.9 }}
+                      className="bg-white text-primary-black px-6 py-3 rounded-full font-semibold flex items-center space-x-2 shadow-xl"
+                    >
+                      <ExternalLink className="w-4 h-4" />
+                      <span>Detayları Gör</span>
+                    </motion.button>
+                  </motion.div>
+                )}
               </div>
 
               {/* Content */}
@@ -163,17 +175,20 @@ export default function Portfolio() {
                 </p>
 
                 {/* Features */}
-                <div className="space-y-2">
+                <div className="flex flex-wrap gap-2">
                   {item.features.map((feature, featureIndex) => (
                     <motion.div
                       key={feature}
-                      initial={{ opacity: 0, x: -20 }}
-                      whileInView={{ opacity: 1, x: 0 }}
-                      transition={{ delay: featureIndex * 0.05 }}
-                      className="flex items-center space-x-2"
+                      initial={{ opacity: 0, scale: 0.8 }}
+                      whileInView={{ opacity: 1, scale: 1 }}
+                      transition={{ delay: featureIndex * 0.1 }}
+                      className={`px-3 py-1.5 rounded-full text-xs font-semibold ${
+                        item.comingSoon 
+                          ? 'bg-gray-100 text-gray-600 border border-gray-200' 
+                          : `bg-gradient-to-r ${item.color} text-white shadow-sm`
+                      }`}
                     >
-                      <div className="w-2 h-2 bg-primary-yellow rounded-full"></div>
-                      <span className="text-sm text-primary-gray">{feature}</span>
+                      {feature}
                     </motion.div>
                   ))}
                 </div>
