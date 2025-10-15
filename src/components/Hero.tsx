@@ -6,7 +6,7 @@ import { Zap, CheckCircle } from 'lucide-react';
 import HeroRotatingCard from './HeroRotatingCard';
 
 const typingTexts = [
-  { text: 'Sevgiline özel', emoji: '💛' },
+  { text: 'Sevdiğinize özel', emoji: '💛' },
   { text: 'Şirketine özel', emoji: '🏢' },
   { text: 'Sanat gibi tasarımlar', emoji: '🎨' },
   { text: 'Hızlı teslim garantisi', emoji: '⚡' },
@@ -50,7 +50,7 @@ export default function Hero() {
 
 
   return (
-    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-purple-100 via-pink-50 to-yellow-50 pt-24 md:pt-32 pb-8">
+    <section id="hero" className="relative min-h-screen flex items-center justify-center overflow-hidden bg-gradient-to-br from-purple-100 via-pink-50 to-yellow-50 pt-8 md:pt-16 pb-8">
       {/* Brush Stroke Animations */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         {/* Brush Stroke 1 */}
@@ -149,8 +149,8 @@ export default function Hero() {
         </motion.div>
       </div>
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="flex flex-col items-center lg:grid lg:grid-cols-2 gap-8 lg:gap-12 xl:gap-16 items-stretch">
+      <div className="w-full px-4 sm:px-6 md:px-8 lg:max-w-5xl lg:mx-auto lg:px-8 relative z-10">
+        <div className="flex flex-col items-center lg:grid lg:grid-cols-2 gap-4 lg:gap-12 xl:gap-16 items-stretch">
           {/* Başlık Alanı - Mobilde Ortalı */}
           <motion.div
             initial={{ opacity: 0, y: 30 }}

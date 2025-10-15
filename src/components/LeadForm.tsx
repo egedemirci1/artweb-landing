@@ -139,9 +139,8 @@ export default function LeadForm() {
                   src="https://www.instagram.com/artweb.tr/embed/"
                   width="100%"
                   height="600"
-                  frameBorder="0"
+                  style={{ border: 0 }}
                   scrolling="no"
-                  allowTransparency={true}
                   className="rounded-lg"
                   title="Instagram Profile"
                 ></iframe>
